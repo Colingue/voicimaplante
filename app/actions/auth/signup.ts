@@ -5,19 +5,23 @@ import { createClient } from '@/utils/supabase/server';
 import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
 
-export async function signup(state: FormState, formData: FormData) {
+export async function signup(initialState: FormState, formData: FormData) {
   const supabase = await createClient();
 
-  console.log('Signup action called with state:', state, formData);
-  console.log(formData.get('email'), formData.get('password'));
   // Validate form fields
   const validatedFields = SignupFormSchema.safeParse({
     email: formData.get('email'),
     password: formData.get('password'),
+    name: formData.get('name'),
+    confirmPassword: formData.get('confirm-password'),
   });
 
   if (!validatedFields.success) {
     return {
+      email: formData.get('email') as string,
+      name: formData.get('name') as string,
+      password: formData.get('password') as string,
+      confirmPassword: formData.get('confirm-password') as string,
       errors: validatedFields.error.flatten().fieldErrors,
     };
   }
@@ -25,12 +29,20 @@ export async function signup(state: FormState, formData: FormData) {
   const data = {
     email: validatedFields.data.email,
     password: validatedFields.data.password,
+    name: validatedFields.data.name,
   };
 
-  const { error } = await supabase.auth.signUp({
+  const { error, data: dataSupabase } = await supabase.auth.signUp({
     email: data.email,
     password: data.password,
+    options: {
+      data: {
+        name: data.name,
+      },
+    },
   });
+
+  console.log('Signup Error:', error, dataSupabase);
 
   if (error) {
     return { message: 'An error occurred while creating your account' };
