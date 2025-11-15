@@ -5,6 +5,7 @@ import { Button } from '@/components/ui/button';
 import {
   Field,
   FieldDescription,
+  FieldError,
   FieldGroup,
   FieldLabel,
   FieldSeparator,
@@ -55,21 +56,34 @@ export function SignupForm({
             placeholder="m@example.com"
             required
           />
-          {state?.errors?.email && <p>{state.errors.email}</p>}
+          {state?.errors?.email && (
+            <FieldError
+              errors={state?.errors?.email.map((e) => ({
+                message: e,
+              }))}
+            />
+          )}{' '}
         </Field>
-        <Field>
+        <Field data-invalid={state?.errors?.password}>
           <FieldLabel htmlFor="password">Password</FieldLabel>
           <Input
             id="password"
             name="password"
             type="password"
+            aria-invalid={!!state?.errors?.password}
             defaultValue={state?.password}
             required
           />
           <FieldDescription>
             Must be at least 8 characters long.
           </FieldDescription>
-          {state?.errors?.password && <p>{state.errors.password}</p>}
+          {state?.errors?.password && (
+            <FieldError
+              errors={state?.errors?.password.map((e) => ({
+                message: e,
+              }))}
+            />
+          )}
         </Field>
         <Field>
           <FieldLabel htmlFor="confirm-password">Confirm Password</FieldLabel>
@@ -82,7 +96,11 @@ export function SignupForm({
           />
           <FieldDescription>Please confirm your password.</FieldDescription>
           {state?.errors?.confirmPassword && (
-            <p>{state.errors.confirmPassword}</p>
+            <FieldError
+              errors={state?.errors?.confirmPassword.map((e) => ({
+                message: e,
+              }))}
+            />
           )}
         </Field>
         {state?.message && <p>{state.message}</p>}

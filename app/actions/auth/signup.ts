@@ -49,5 +49,5 @@ export async function signup(initialState: FormState, formData: FormData) {
   }
 
   revalidatePath('/', 'layout');
-  redirect('/');
+  redirect('/mail-confirmation');
 }
