@@ -62,5 +62,6 @@ export interface Timestamps {
 export interface Plant extends Timestamps {
   id: string;
   name: string;
-  photo_url: string;
+  slug: string;
+  photo_url?: string;
 }
