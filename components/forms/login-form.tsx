@@ -26,7 +26,6 @@ export function LoginForm({
 }: React.ComponentProps<'div'>) {
   const [state, action, pending] = useActionState(login, undefined);
 
-  console.log('Login Form State:', state);
   return (
     <div className={cn('flex flex-col gap-6', className)} {...props}>
       <Card>

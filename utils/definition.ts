@@ -53,3 +53,14 @@ export type LoginFormState =
       message?: string;
     }
   | undefined;
+
+export interface Timestamps {
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface Plant extends Timestamps {
+  id: string;
+  name: string;
+  photo_url: string;
+}
