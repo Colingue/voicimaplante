@@ -65,3 +65,10 @@ export interface Plant extends Timestamps {
   slug: string;
   photo_url?: string;
 }
+
+export interface Offer extends Timestamps {
+  id: string;
+  user_id: string;
+  plant_id: string;
+  description?: string;
+}

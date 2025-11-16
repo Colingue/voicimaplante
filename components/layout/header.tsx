@@ -1,8 +1,5 @@
-'use client';
-
-import { logout } from '@/app/actions/auth/logout';
-import { Button } from '../ui/button';
 import { GalleryVerticalEnd } from 'lucide-react';
+import { ProfileDropdown } from './profile-dropdown';
 
 export default function Header() {
   return (
@@ -14,9 +11,7 @@ export default function Header() {
           </div>
           Voicimaplante.
         </a>
-        <Button variant={'outline'} onClick={logout}>
-          Se deconnecter
-        </Button>
+        <ProfileDropdown />
       </div>
     </header>
   );

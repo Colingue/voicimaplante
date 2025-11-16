@@ -1,4 +1,4 @@
-import PlantDetailInfo from '@/features/plants/PlantDetailInfo';
+import PlantDetailInfo from '@/features/plants/plant-detail-info';
 import { Plant } from '@/utils/definition';
 import { createClient } from '@/utils/supabase/server';
 
