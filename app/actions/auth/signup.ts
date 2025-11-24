@@ -1,11 +1,14 @@
 'use server';
 
-import { FormState, SignupFormSchema } from '@/utils/definition';
+import { SignupFormState, SignupFormSchema } from '@/utils/definition';
 import { createClient } from '@/utils/supabase/server';
 import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
 
-export async function signup(initialState: FormState, formData: FormData) {
+export async function signup(
+  initialState: SignupFormState,
+  formData: FormData,
+) {
   const supabase = await createClient();
 
   // Validate form fields

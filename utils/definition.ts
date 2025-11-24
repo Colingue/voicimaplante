@@ -22,7 +22,7 @@ export const SignupFormSchema = z
     path: ['confirmPassword'],
   });
 
-export type FormState =
+export type SignupFormState =
   | {
       email?: string;
       name?: string;
@@ -53,6 +53,23 @@ export type LoginFormState =
       message?: string;
     }
   | undefined;
+
+export type OfferFormState =
+  | {
+      plantId?: string;
+      description?: string;
+      errors?: {
+        plantId?: string[];
+        description?: string[];
+      };
+      message?: string;
+    }
+  | undefined;
+
+export const OfferFormSchema = z.object({
+  plantId: z.string().min(1, { error: 'Please select a plant.' }).trim(),
+  description: z.string().trim().optional(),
+});
 
 export interface Timestamps {
   createdAt: string;
