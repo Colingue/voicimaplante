@@ -9,7 +9,9 @@ export default function PlantGridCart({ plant }: { plant: Plant }) {
       <div className="flex flex-col items-centertext-gray-500">
         <div className="relative w-full aspect-square rounded-lg overflow-hidden">
           <Image
-            src={'/img/monstera.png'}
+            src={
+              Math.random() > 0.5 ? '/img/monstera.png' : '/img/calathea.png'
+            }
             alt={plant.name}
             fill
             className="rounded-t-lg object-cover"
