@@ -12,6 +12,7 @@ export async function logout() {
 
   console.log('Logging out user:', user);
   if (user) {
+    console.log('je passe la mon user est : ', user);
     supabase.auth.signOut();
   }
 

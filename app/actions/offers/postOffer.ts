@@ -28,7 +28,7 @@ export async function postOffer(
   await supabase.from('offers').insert({
     plant_id: validatedFields.data.plantId,
     description: validatedFields.data.description,
-    user_id: user?.id,
+    profile_id: user?.id,
   });
 
   return {

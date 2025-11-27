@@ -2,8 +2,14 @@ import { GalleryVerticalEnd } from 'lucide-react';
 import { ProfileDropdown } from './profile-dropdown';
 import Link from 'next/link';
 import { Button } from '../ui/button';
+import { createClient } from '@/utils/supabase/server';
 
-export default function Header() {
+export default async function Header() {
+  const supabase = await createClient();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+
   return (
     <header className="container mx-auto w-full border-b bg-white/50 backdrop-blur-md sticky top-0 z-50">
       <div className="flex justify-between h-16 flex items-center">
@@ -14,10 +20,23 @@ export default function Header() {
           Voicimaplante.
         </Link>
         <div className="flex gap-4 items-center">
-          <ProfileDropdown />
-          <Link href={'/offers/new'}>
-            <Button>Déposer une annonce</Button>
-          </Link>
+          {user ? (
+            <>
+              <ProfileDropdown />
+              <Link href={'/offers/new'}>
+                <Button>Déposer une annonce</Button>
+              </Link>
+            </>
+          ) : (
+            <>
+              <Link href={'/signup'}>
+                <Button variant={'link'}>S'inscrire</Button>
+              </Link>
+              <Link href={'/login'}>
+                <Button>Se connecter</Button>
+              </Link>
+            </>
+          )}
         </div>
       </div>
     </header>

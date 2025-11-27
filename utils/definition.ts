@@ -72,8 +72,8 @@ export const OfferFormSchema = z.object({
 });
 
 export interface Timestamps {
-  createdAt: string;
-  updatedAt: string;
+  created_at: string;
+  updated_at: string;
 }
 
 export interface Plant extends Timestamps {
@@ -85,7 +85,19 @@ export interface Plant extends Timestamps {
 
 export interface Offer extends Timestamps {
   id: string;
-  user_id: string;
+  profile_id: string;
   plant_id: string;
   description?: string;
+  profiles?: {
+    username: string;
+  };
+  plants?: {
+    name: string;
+  };
+}
+
+export interface Profile {
+  id: string;
+  user_id: string;
+  name: string;
 }
